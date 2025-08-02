@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Watch Anime - GoWatch</title>
+  <style>
+    body { background:#111; color:#eee; font-family: Arial, sans-serif; text-align:center; padding:20px;}
+    video { width: 80%; max-width: 900px; border-radius:10px; box-shadow: 0 0 15px #ff4757;}
+    button { margin-top: 20px; padding: 10px 25px; background: #ff4757; border: none; border-radius: 5px; color: white; cursor:pointer;}
+  </style>
+</head>
+<body>
+  <h2 id="anime-title">Loading...</h2>
+  <div id="video-container"></div>
+  <button onclick="window.location.href='home.html'">Back to Home</button>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const anime = urlParams.get('anime');
+
+    const videos = {
+      naruto: 'videos/naruto-ep1.mp4',
+      onepiece: 'videos/onepiece-ep1.mp4',
+      demonslayer: 'videos/demonslayer-ep1.mp4',
+      attackontitan: 'videos/attackontitan-ep1.mp4',
+      jujutsukaisen: 'videos/jujutsukaisen-ep1.mp4',
+      blackclover: 'videos/Black%20Clover-S1E6-720P.mp4'  // فيديوك المحلي
+    };
+
+    const titles = {
+      naruto: 'Naruto',
+      onepiece: 'One Piece',
+      demonslayer: 'Demon Slayer',
+      attackontitan: 'Attack on Titan',
+      jujutsukaisen: 'Jujutsu Kaisen',
+      blackclover: 'Black Clover S1E6'
+    };
+
+    const videoContainer = document.getElementById('video-container');
+    const animeTitle = document.getElementById('anime-title');
+
+    if(anime && videos[anime]) {
+      animeTitle.textContent = titles[anime];
+      videoContainer.innerHTML = `<video controls>
+        <source src="${videos[anime]}" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>`;
+    } else {
+      animeTitle.textContent = 'video not found';
+      videoContainer.innerHTML = '';
+    }
+  </script>
+</body>
+</html>
